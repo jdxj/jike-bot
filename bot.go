@@ -41,9 +41,8 @@ func (b *Bot) PostWallpaper() {
 	searchRsp, err := b.whc.Search(ctx, &wh.SearchReq{
 		Category: wh.People | wh.Anime | wh.General,
 		Purity:   wh.SFW,
-		Sorting:  wh.TopList,
+		Sorting:  wh.Random,
 		Order:    wh.Desc,
-		TopRange: wh.D1,
 	})
 	if err != nil {
 		logger.Errorf("%s", err)
