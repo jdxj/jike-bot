@@ -1,6 +1,6 @@
-wh_api_key: ""
-cache_path: ""
-area_code: ""
-phone: ""
-password: ""
-spec: ""
+wh_api_key: ''
+cache_path: ''
+area_code: ''
+phone: ''
+password: ''
+spec: ''

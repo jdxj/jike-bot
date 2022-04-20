@@ -16,4 +16,4 @@
 
 .idea/
 
-config.yaml
+deploy/config.yaml

@@ -11,7 +11,8 @@ var (
 func init() {
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath("./")
+	viper.AddConfigPath("./deploy")
+	viper.AddConfigPath("/jike-bot/config")
 
 	err := viper.ReadInConfig()
 	if err != nil {
