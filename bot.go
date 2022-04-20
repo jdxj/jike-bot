@@ -21,7 +21,7 @@ func New() *Bot {
 	bot := &Bot{
 		rc:   resty.New(),
 		whc:  wh.NewClient(),
-		jkc:  jike.NewClient(),
+		jkc:  jike.NewClient(jike.WithDebug(true)),
 		cron: cron.New(),
 	}
 	return bot

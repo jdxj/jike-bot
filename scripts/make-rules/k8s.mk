@@ -1,6 +1,9 @@
 .PHONY: k8s.create.secret
 k8s.create.secret:
+	@kubectl -n jike scale deployment jike-bot-dep --replicas=0
+	@kubectl -n jike delete secrets jike-bot-config
 	@kubectl -n jike create secret generic jike-bot-config --from-file=$(DEPLOY)/config.yaml
+	@kubectl -n jike scale deployment jike-bot-dep --replicas=1
 
 .PHONY: k8s.create.deploy
 k8s.create.deploy:
