@@ -17,3 +17,4 @@
 .idea/
 
 deploy/config.yaml
+deploy/kube_config.yaml
