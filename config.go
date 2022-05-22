@@ -25,7 +25,9 @@ func init() {
 }
 
 type Config struct {
-	WhAPIKey  string `mapstructure:"wh_api_key"`
+	WhAPIKey string `mapstructure:"wh_api_key"`
+	PeAPIKey string `mapstructure:"pe_api_key"`
+
 	CachePath string `mapstructure:"cache_path"`
 	AreaCode  string `mapstructure:"area_code"`
 	Phone     string `mapstructure:"phone"`

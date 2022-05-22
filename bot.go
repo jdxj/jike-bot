@@ -9,7 +9,6 @@ import (
 
 	"github.com/go-resty/resty/v2"
 	jike "github.com/jdxj/jike-sdk-go"
-	wh "github.com/jdxj/wallhaven-sdk-go"
 	"github.com/robfig/cron/v3"
 )
 
@@ -19,45 +18,37 @@ var (
 
 func New() *Bot {
 	bot := &Bot{
-		rc:   resty.New(),
-		whc:  wh.NewClient(),
-		jkc:  jike.NewClient(jike.WithDebug(true)),
-		cron: cron.New(),
+		rc:     resty.New(),
+		jkc:    jike.NewClient(),
+		cron:   cron.New(),
+		poller: &poller{},
 	}
+
+	bot.poller.registerWallpaperSource(newWallhavenSource())
+	bot.poller.registerWallpaperSource(newPexelsSource(conf.PeAPIKey))
 	return bot
 }
 
 type Bot struct {
 	rc   *resty.Client
-	whc  *wh.Client
 	jkc  *jike.Client
 	cron *cron.Cron
+
+	poller *poller
 }
 
 func (b *Bot) PostWallpaper() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*30)
 	defer cancel()
 
-	searchRsp, err := b.whc.Search(ctx, &wh.SearchReq{
-		Category: wh.People | wh.Anime | wh.General,
-		Purity:   wh.SFW,
-		Sorting:  wh.Random,
-		Order:    wh.Desc,
-	})
+	urlPath, err := b.poller.GetWallpaper(ctx)
 	if err != nil {
-		logger.Errorf("%s", err)
+		logger.Errorf("%s\n", err)
 		return
 	}
-	if len(searchRsp.Wallpapers) == 0 {
-		logger.Errorf("%s", ErrWallpaperNotFound)
-		return
-	}
-
-	wallpaper := searchRsp.Wallpapers[0]
-	urlPath := wallpaper.Path
 	filename := path.Base(urlPath)
 	fullPath := filepath.Join(conf.CachePath, filename)
-	_, err = resty.New().R().
+	_, err = b.rc.R().
 		SetOutput(fullPath).
 		Get(urlPath)
 	if err != nil {
