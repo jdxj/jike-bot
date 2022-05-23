@@ -41,7 +41,7 @@ func (ws *wallhavenSource) GetWallpaper(ctx context.Context) (string, error) {
 
 func newPexelsSource(apiKey string) *pexelsSource {
 	return &pexelsSource{
-		pc: pexels.NewClient(apiKey),
+		pc: pexels.NewClient(apiKey, pexels.WithDebug(true)),
 	}
 }
 
