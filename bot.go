@@ -94,7 +94,7 @@ func (b *Bot) PostWallpaper() {
 		logger.Errorf("%s", err)
 		return
 	}
-	logger.Info("post %s ok", urlPath)
+	logger.Infof("post %s ok", urlPath)
 }
 
 func (b *Bot) Run() {
