@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/jdxj/jike-sdk-go v0.0.0-20220405034050-7c7086a6498e
-	github.com/jdxj/pexels-sdk-go v0.0.0-20220523014323-01f026e15169
+	github.com/jdxj/pexels-sdk-go v0.0.0-20220525060352-06235b61ecb1
 	github.com/jdxj/wallhaven-sdk-go v0.0.0-20220404073952-e4b7b6009702
 	github.com/robfig/cron/v3 v3.0.0
 	github.com/spf13/viper v1.10.1
@@ -31,7 +31,7 @@ require (
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	golang.org/x/crypto v0.0.0-20220518034528-6f7dac969898 // indirect
-	golang.org/x/net v0.0.0-20220520000938-2e3eb7b945c2 // indirect
+	golang.org/x/net v0.0.0-20220524220425-1d687d428aca // indirect
 	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
 	golang.org/x/text v0.3.7 // indirect
 	gopkg.in/ini.v1 v1.66.2 // indirect
