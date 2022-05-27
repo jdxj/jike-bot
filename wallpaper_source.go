@@ -13,22 +13,34 @@ type WallpaperSource interface {
 	GetWallpaper(context.Context) (string, error)
 }
 
+const (
+	pageSize = 24
+)
+
 func newWallhavenSource() *wallhavenSource {
 	return &wallhavenSource{
-		whc: wh.NewClient(),
+		whc:   wh.NewClient(),
+		total: 1,
 	}
 }
 
 type wallhavenSource struct {
 	whc *wh.Client
+
+	total int
 }
 
 func (ws *wallhavenSource) GetWallpaper(ctx context.Context) (string, error) {
+	rand.Seed(time.Now().UnixNano())
+	randTotal := rand.Intn(ws.total)
+
 	searchRsp, err := ws.whc.Search(ctx, &wh.SearchReq{
 		Category: wh.People | wh.Anime | wh.General,
 		Purity:   wh.SFW,
-		Sorting:  wh.Random,
+		Sorting:  wh.TopList,
 		Order:    wh.Desc,
+		TopRange: wh.M1,
+		Page:     (randTotal - randTotal%pageSize + pageSize) / pageSize,
 	})
 	if err != nil {
 		return "", err
@@ -36,7 +48,10 @@ func (ws *wallhavenSource) GetWallpaper(ctx context.Context) (string, error) {
 	if len(searchRsp.Wallpapers) == 0 {
 		return "", ErrWallpaperNotFound
 	}
-	return searchRsp.Wallpapers[0].Path, nil
+
+	url := searchRsp.Wallpapers[randTotal%pageSize].Path
+	ws.total = searchRsp.Meta.Total
+	return url, nil
 }
 
 func newPexelsSource(apiKey string) *pexelsSource {
