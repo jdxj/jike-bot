@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"errors"
-	"path"
+	"net/url"
 	"path/filepath"
 	"time"
 
@@ -46,10 +46,16 @@ func (b *Bot) PostWallpaper() {
 		logger.Errorf("%s\n", err)
 		return
 	}
-	filename := path.Base(urlPath)
-	fullPath := filepath.Join(conf.CachePath, filename)
+
+	httpURL, err := url.Parse(urlPath)
+	if err != nil {
+		logger.Errorf("%s\n", err)
+		return
+	}
+	absolutePath := filepath.Join(conf.CachePath, httpURL.Path)
+
 	_, err = b.rc.R().
-		SetOutput(fullPath).
+		SetOutput(absolutePath).
 		Get(urlPath)
 	if err != nil {
 		logger.Errorf("%s", err)
@@ -66,7 +72,7 @@ func (b *Bot) PostWallpaper() {
 		return
 	}
 
-	utReq, err := jike.NewUploadTokenReq(fullPath, jike.PIC)
+	utReq, err := jike.NewUploadTokenReq(absolutePath, jike.PIC)
 	if err != nil {
 		logger.Errorf("%s", err)
 		return
@@ -79,7 +85,7 @@ func (b *Bot) PostWallpaper() {
 
 	uRsp, err := b.jkc.Upload(ctx, &jike.UploadReq{
 		UploadToken: utRsp.UpToken,
-		Filename:    fullPath,
+		Filename:    absolutePath,
 	})
 	if err != nil {
 		logger.Errorf("%s", err)
