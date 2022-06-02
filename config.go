@@ -33,4 +33,7 @@ type Config struct {
 	Phone     string `mapstructure:"phone"`
 	Password  string `mapstructure:"password"`
 	Spec      string `mapstructure:"spec"`
+
+	UnsplashAK string `mapstructure:"unsplash_ak"`
+	UnsplashSK string `mapstructure:"unsplash_sk"`
 }

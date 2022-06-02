@@ -26,6 +26,8 @@ github.com/jdxj/jike-sdk-go v0.0.0-20220405034050-7c7086a6498e h1:z0+4na183lnpf+
 github.com/jdxj/jike-sdk-go v0.0.0-20220405034050-7c7086a6498e/go.mod h1:c2QDTdHcgYKXW+UKgARCM5ZTA0wNh6Kxv5czF6/ZiyU=
 github.com/jdxj/pexels-sdk-go v0.0.0-20220525060352-06235b61ecb1 h1:k7XA5hf3g+wdP3ZJhCxDB3yesyFC1S2710t9vrT28+g=
 github.com/jdxj/pexels-sdk-go v0.0.0-20220525060352-06235b61ecb1/go.mod h1:klC7kNbV8fc6kYm6nQQRzmbOilMDpUOjn1kdQF6Jr+M=
+github.com/jdxj/unsplash-sdk-go v0.0.0-20220602034712-a5861429d9f8 h1:fiwPZ9uB1zLpCZnEvMUy2Ugf+gaTj6e6iquyMtEzolI=
+github.com/jdxj/unsplash-sdk-go v0.0.0-20220602034712-a5861429d9f8/go.mod h1:BcJpu9kJ8fbnxSwM9ryrIsoxUen7VbA7IoHS3quqOEA=
 github.com/jdxj/wallhaven-sdk-go v0.0.0-20220404073952-e4b7b6009702 h1:LG9XQjvMrfVhiWXLIYTRX1aByAX+YjW9+tdmBdWElSg=
 github.com/jdxj/wallhaven-sdk-go v0.0.0-20220404073952-e4b7b6009702/go.mod h1:bhZ/RHrD4bjN3Rx9fVKdnHs0ekpBCKoMBQmUIvIhcrY=
 github.com/kr/fs v0.1.0/go.mod h1:FFnZGqtBN9Gxj7eW1uZ42v5BccTP0vu6NEaFoC2HwRg=

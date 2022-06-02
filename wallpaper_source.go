@@ -6,6 +6,7 @@ import (
 	"time"
 
 	pexels "github.com/jdxj/pexels-sdk-go"
+	unsplash_sdk_go "github.com/jdxj/unsplash-sdk-go"
 	wh "github.com/jdxj/wallhaven-sdk-go"
 )
 
@@ -79,4 +80,22 @@ func (ps *pexelsSource) GetWallpaper(ctx context.Context) (string, error) {
 		return "", ErrWallpaperNotFound
 	}
 	return pl.Photos[0].Src.Original, nil
+}
+
+func newUnsplashSource(ak, sk string) *unsplashSource {
+	return &unsplashSource{
+		uc: unsplash_sdk_go.New(ak, sk, unsplash_sdk_go.WithDebug(true)),
+	}
+}
+
+type unsplashSource struct {
+	uc *unsplash_sdk_go.Client
+}
+
+func (us *unsplashSource) GetWallpaper(ctx context.Context) (string, error) {
+	rsp, err := us.uc.GetRandomPhoto(ctx, nil)
+	if err != nil {
+		return "", err
+	}
+	return rsp.Urls.Full, nil
 }

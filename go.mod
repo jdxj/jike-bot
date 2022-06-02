@@ -6,6 +6,7 @@ require (
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/jdxj/jike-sdk-go v0.0.0-20220405034050-7c7086a6498e
 	github.com/jdxj/pexels-sdk-go v0.0.0-20220525060352-06235b61ecb1
+	github.com/jdxj/unsplash-sdk-go v0.0.0-20220602034712-a5861429d9f8
 	github.com/jdxj/wallhaven-sdk-go v0.0.0-20220404073952-e4b7b6009702
 	github.com/robfig/cron/v3 v3.0.0
 	github.com/spf13/viper v1.10.1
