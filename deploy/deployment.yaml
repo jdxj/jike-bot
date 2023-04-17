@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: jike-bot-c
-          image: jdxj/jike-bot:test-2dbbc59
+          image: jdxj/jike-bot:test-5b3b30d
           command: [ "/jike-bot/jike-bot.out" ]
           # args: [ "--config", "/jike-bot/config/config.yaml" ]
           volumeMounts:
