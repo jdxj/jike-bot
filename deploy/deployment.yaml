@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jike-bot-dep
+  namespace: jike
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jike-bot
+  template:
+    metadata:
+      name: jike-bot-temp
+      labels:
+        app: jike-bot
+    spec:
+      containers:
+        - name: jike-bot-c
+          image: jdxj/jike-bot:test-5b3b30d
+          command: [ "/jike-bot/jike-bot.out" ]
+          # args: [ "--config", "/jike-bot/config/config.yaml" ]
+          volumeMounts:
+            - mountPath: /jike-bot/config
+              name: jike-bot-config
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+      volumes:
+        - name: jike-bot-config
+          secret:
+            secretName: jike-bot-config
