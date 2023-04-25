@@ -10,6 +10,10 @@ import (
 	wh "github.com/jdxj/wallhaven-sdk-go"
 )
 
+var (
+	myRand = rand.New(rand.NewSource(time.Now().UnixNano()))
+)
+
 type WallpaperSource interface {
 	GetWallpaper(context.Context) (string, error)
 }
@@ -32,11 +36,11 @@ type wallhavenSource struct {
 }
 
 func (ws *wallhavenSource) GetWallpaper(ctx context.Context) (string, error) {
-	rand.Seed(time.Now().UnixNano())
-	randTotal := rand.Intn(ws.total)
+	randTotal := myRand.Intn(ws.total)
 
 	searchRsp, err := ws.whc.Search(ctx, &wh.SearchReq{
 		Category: wh.People | wh.Anime | wh.General,
+		AIArt:    true,
 		Purity:   wh.SFW,
 		Sorting:  wh.TopList,
 		Order:    wh.Desc,
@@ -66,10 +70,9 @@ type pexelsSource struct {
 }
 
 func (ps *pexelsSource) GetWallpaper(ctx context.Context) (string, error) {
-	rand.Seed(time.Now().UnixNano())
 	pl, err := ps.pc.CuratedPhotos(ctx, &pexels.CuratedReq{
 		Pagination: pexels.Pagination{
-			Page:    rand.Intn(8000) + 1,
+			Page:    myRand.Intn(8000) + 1,
 			PerPage: 1,
 		},
 	})

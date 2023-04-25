@@ -25,8 +25,8 @@ func New() *Bot {
 	}
 
 	bot.poller.registerWallpaperSource(newWallhavenSource())
-	bot.poller.registerWallpaperSource(newPexelsSource(conf.PeAPIKey))
-	bot.poller.registerWallpaperSource(newUnsplashSource(conf.UnsplashAK, conf.UnsplashSK))
+	// bot.poller.registerWallpaperSource(newPexelsSource(conf.PeAPIKey))
+	// bot.poller.registerWallpaperSource(newUnsplashSource(conf.UnsplashAK, conf.UnsplashSK))
 	return bot
 }
 
